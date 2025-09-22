@@ -7,9 +7,10 @@ public class Player : MonoBehaviour
 {
 
     //we can modify from the inspectorr
-    public float speed = 40f;
+    public float speed = 6f;
 
     public GameObject startPanel;
+
 
 
 
@@ -18,7 +19,11 @@ public class Player : MonoBehaviour
 
     float horizontalX = 0f;
 
+    int maxJumps = 0;
+
     bool started = false;   
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -38,15 +43,6 @@ public class Player : MonoBehaviour
 
     }
 
-
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
 
     void FixedUpdate()
@@ -89,4 +85,21 @@ public class Player : MonoBehaviour
         }
     }
 
+
+    public void onJump(InputAction.CallbackContext c)
+    {
+        if (c.performed && maxJumps < 2)
+        {
+            //jump
+            rigidbody2D.AddForce(Vector2.up * 400f);
+            maxJumps++;
+        }
+    }
+
+    // Reset jumps when touching Ground
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.collider.CompareTag("Ground"))
+            maxJumps = 0;
+    }
 }
