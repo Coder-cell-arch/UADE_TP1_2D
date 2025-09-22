@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 
     public GameObject startPanel;
 
-
+    public DummyHit dummy;
 
 
 
@@ -20,7 +20,6 @@ public class Player : MonoBehaviour
     float horizontalX = 0f;
 
     int maxJumps = 0;
-
     bool started = false;   
 
 
@@ -101,5 +100,12 @@ public class Player : MonoBehaviour
     {
         if (col.collider.CompareTag("Ground"))
             maxJumps = 0;
+    }
+
+
+    public void OnMelee(InputAction.CallbackContext c)
+    {
+        if (c.performed && dummy != null && Vector2.Distance(transform.position, dummy.transform.position) < 2f)
+            dummy.TriggerHit();
     }
 }
