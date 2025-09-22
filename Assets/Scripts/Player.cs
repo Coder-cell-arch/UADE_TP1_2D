@@ -9,16 +9,33 @@ public class Player : MonoBehaviour
     //we can modify from the inspectorr
     public float speed = 40f;
 
+    public GameObject startPanel;
+
+
+
 
     Rigidbody2D rigidbody2D;
 
     float horizontalX = 0f;
+
+    bool started = false;   
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
 
         rigidbody2D = GetComponent<Rigidbody2D>();
+
+        if (startPanel)
+
+        {
+
+            startPanel.SetActive(true);
+            Time.timeScale = 0f; // paused until Start
+
+        }
+
+
     }
 
 
@@ -56,6 +73,19 @@ public class Player : MonoBehaviour
         if (c.canceled)
         {
             horizontalX = 0f;
+        }
+    }
+
+
+    // Input:Gameplay / Start (Enter)
+    public void OnStart(InputAction.CallbackContext c)
+    {
+
+        if (c.performed && !started)
+        {
+            started = true;
+            if (startPanel) startPanel.SetActive(false);
+            Time.timeScale = 1f;
         }
     }
 
