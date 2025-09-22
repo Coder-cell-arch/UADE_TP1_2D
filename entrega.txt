@@ -1,0 +1,20 @@
+﻿TP1
+
+Student: Ezequiel Scala
+Repository: https://github.com/Coder-cell-arch/UADE_TP1_2D
+Unity version: 6000.0.30f1
+
+How to open:
+1) Clone the repo or Download ZIP and extract.
+2) In Unity Hub: Open the repo folder (you must see Assets/Packages/ProjectSettings at the root).
+3) Open Assets/Scenes/GameScene.unity and press Play.
+
+Controls:
+- ENTER: start (initial screen)
+- A/D: move
+- SPACE: double jump
+- C: melee
+
+Notes:
+- Tilemap uses TilemapCollider2D + Rigidbody2D (Static).
+- Dummy has Idle/Hit animations and reacts to the player's melee.
