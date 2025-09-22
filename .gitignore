@@ -8,3 +8,13 @@ UserSettings/
 MemoryCaptures/
 .vs/
 .idea/
+# IDE / solution files
+*.sln
+*.csproj
+*.suo
+*.user
+*.unityproj
+.vs/
+.vscode/
+.vsconfig
+*.DotSettings.user
