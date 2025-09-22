@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-
 public class Player : MonoBehaviour
 {
 
@@ -19,7 +18,7 @@ public class Player : MonoBehaviour
 
     float horizontalX = 0f;
 
-    int maxJumps = 0;
+    int jumps = 0;
     bool started = false;   
 
 
@@ -42,8 +41,6 @@ public class Player : MonoBehaviour
 
     }
 
-
-
     void FixedUpdate()
     {
         //get actual velocity of the player
@@ -61,7 +58,7 @@ public class Player : MonoBehaviour
     public void OnMove(InputAction.CallbackContext c)
     {
 
-        // Read the horizontal value from the input (-1, 0, or 1)..
+        // Read the horizontal value from the input (-1, 0, or  1)
         horizontalX = c.ReadValue<Vector2>().x;
 
         // if the input is canceled, the player is not moving
@@ -84,14 +81,13 @@ public class Player : MonoBehaviour
         }
     }
 
-
     public void onJump(InputAction.CallbackContext c)
     {
-        if (c.performed && maxJumps < 2)
+        if (c.performed && jumps < 2)
         {
             //jump
             rigidbody2D.AddForce(Vector2.up * 400f);
-            maxJumps++;
+            jumps++;
         }
     }
 
@@ -99,13 +95,17 @@ public class Player : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.collider.CompareTag("Ground"))
-            maxJumps = 0;
+            jumps = 0;
     }
 
 
+
     public void OnMelee(InputAction.CallbackContext c)
+
     {
-        if (c.performed && dummy != null && Vector2.Distance(transform.position, dummy.transform.position) < 2f)
+                        // Calculate distance between player and dummy, if less than 2 units allow hit
+        if (c.performed && Vector2.Distance(transform.position, dummy.transform.position) < 2f)
+
             dummy.TriggerHit();
     }
 }
